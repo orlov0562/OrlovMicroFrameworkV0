@@ -8,13 +8,14 @@
     });
 
     set_exception_handler(function($e){
-        $view = new Controller_Errors;
-        $view->before();
-        $view->Action_Custom(
-            'Exception',
-            $e->getMessage().'<hr>'.'<pre>'.$e->getTraceAsString().'</pre>'
-        );
-        $view->after();
+        omf::c(array(
+            'controller'=>'errors',
+            'action'=>'custom',
+            'vars'=>array(
+                'Exception',
+                $e->getMessage().'<hr><pre>'.$e->getTraceAsString().'</pre>'
+            ),
+        ));
     });
 
     require_once(ROOT_DIR.'inc/config.php');
